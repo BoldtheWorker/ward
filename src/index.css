@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 4%;
+    --foreground: 40 10% 92%;
+
+    --card: 220 18% 8%;
+    --card-foreground: 40 10% 92%;
+
+    --popover: 220 18% 8%;
+    --popover-foreground: 40 10% 92%;
+
+    --primary: 42 72% 52%;
+    --primary-foreground: 220 20% 4%;
+
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 40 10% 85%;
+
+    --muted: 220 15% 14%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 42 72% 52%;
+    --accent-foreground: 220 20% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 16%;
+    --input: 220 15% 16%;
+    --ring: 42 72% 52%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 220 18% 6%;
+    --sidebar-foreground: 40 10% 92%;
+    --sidebar-primary: 42 72% 52%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 40 10% 92%;
+    --sidebar-border: 220 15% 16%;
+    --sidebar-ring: 42 72% 52%;
+
+    /* Custom tokens */
+    --gold: 42 72% 52%;
+    --gold-light: 42 72% 65%;
+    --gold-dark: 42 72% 40%;
+    --charcoal: 220 18% 8%;
+    --navy: 220 25% 12%;
+    --surface: 220 18% 6%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .gold-gradient {
+    background: linear-gradient(135deg, hsl(42, 72%, 52%), hsl(42, 72%, 65%));
+  }
+
+  .gold-text {
+    background: linear-gradient(135deg, hsl(42, 72%, 52%), hsl(42, 72%, 68%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark-gradient {
+    background: linear-gradient(180deg, hsl(220, 20%, 4%) 0%, hsl(220, 25%, 8%) 100%);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(220, 20%, 4%) 0%, hsl(220, 25%, 10%) 40%, hsl(220, 20%, 6%) 100%);
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px -15px hsl(42, 72%, 52%, 0.1);
+    border-color: hsl(42, 72%, 52%, 0.3);
+  }
+
+  .line-accent {
+    @apply w-12 h-px bg-primary;
+  }
+}
