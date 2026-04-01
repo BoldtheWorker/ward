@@ -98,8 +98,8 @@ export const content = {
     subtitle: "Engage With Us",
     description: "We welcome engagement from investors, partners, and institutions aligned with our long-term vision.",
     emails: {
-      general: "info@ward.africa",
-      partnerships: "partnerships@ward.africa"
+      general: "info@wardcapital.org",
+      partnerships: "partnerships@wardcapital.org"
     },
     locations: ["Africa", "Europe", "Middle East"]
   },

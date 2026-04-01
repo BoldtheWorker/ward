@@ -161,7 +161,7 @@ const Index = () => {
             </div>
           </AnimatedSection>
           
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {content.homepage.overview.items.map((item, i) => {
               const icons = [TrendingUp, Building2, Zap];
               const Icon = icons[i % icons.length];
@@ -171,17 +171,13 @@ const Index = () => {
                 <AnimatedSection 
                   key={item.title} 
                   delay={i * 0.15}
-                  className={isPriority ? "md:col-span-3" : "md:col-span-2 md:col-start-3"}
                 >
-                  <div className={`group p-8 lg:p-12 border border-border rounded-sm bg-card card-hover h-full relative overflow-hidden ${isPriority ? "border-primary/20" : ""}`}>
-                    {isPriority && (
-                      <div className="absolute -right-16 -top-16 w-32 h-32 bg-primary/5 blur-3xl rounded-full group-hover:bg-primary/10 transition-colors" />
-                    )}
-                    <div className={`${isPriority ? "w-16 h-16" : "w-12 h-12"} rounded-sm bg-secondary flex items-center justify-center mb-8 group-hover:bg-primary/10 transition-colors duration-500`}>
-                      <Icon className={`${isPriority ? "w-7 h-7" : "w-5 h-5"} text-primary`} />
+                  <div className={`group p-8 lg:p-12 border border-border rounded-sm bg-card card-hover h-full relative overflow-hidden`}>
+                    <div className={`w-12 h-12 rounded-sm bg-secondary flex items-center justify-center mb-8 group-hover:bg-primary/10 transition-colors duration-500`}>
+                      <Icon className={`w-5 h-5 text-primary`} />
                     </div>
-                    <h3 className={`${isPriority ? "text-2xl" : "text-xl"} font-bold text-foreground mb-4`}>{item.title}</h3>
-                    <p className={`text-muted-foreground leading-relaxed ${isPriority ? "text-base" : "text-sm"}`}>{item.description}</p>
+                    <h3 className={`text-xl font-bold text-foreground mb-4`}>{item.title}</h3>
+                    <p className={`text-muted-foreground leading-relaxed text-sm`}>{item.description}</p>
                   </div>
                 </AnimatedSection>
               );
@@ -222,21 +218,17 @@ const Index = () => {
             </div>
           </AnimatedSection>
           
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {content.homepage.platforms.items.map((item, i) => {
               const isPriority = i < 2;
               return (
                 <AnimatedSection 
                   key={item.title} 
                   delay={i * 0.15}
-                  className={isPriority ? "md:col-span-3" : "md:col-span-2 md:col-start-3"}
                 >
-                  <div className={`group p-8 lg:p-12 border border-border rounded-sm bg-card card-hover h-full flex flex-col relative ${isPriority ? "border-primary/30 ring-1 ring-primary/5" : ""}`}>
-                    {isPriority && (
-                      <span className="absolute top-8 right-8 text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">Featured Platform</span>
-                    )}
+                  <div className={`group p-8 lg:p-12 border border-border rounded-sm bg-card card-hover h-full flex flex-col relative`}>
                     <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary mb-6">{item.tag}</span>
-                    <h3 className={`${isPriority ? "text-3xl" : "text-2xl"} font-bold text-foreground mb-6`}>{item.title}</h3>
+                    <h3 className={`text-2xl font-bold text-foreground mb-6`}>{item.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed flex-1">{item.description}</p>
                     <div className="mt-10 pt-6 border-t border-border">
                       <Link to="/platforms" className="text-sm text-muted-foreground group-hover:text-primary flex items-center gap-2 transition-colors font-medium">
