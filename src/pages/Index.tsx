@@ -1,70 +1,33 @@
 import { Link } from "react-router-dom";
 import { useEffect, useCallback, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TrendingUp, Building2, Zap, ArrowRight, Globe, Shield, BarChart3, Landmark, Briefcase, Scale, CircleDollarSign, Building, ChevronLeft, ChevronRight } from "lucide-react";
+import { TrendingUp, Building2, Zap, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { content } from "@/data/content";
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
 
-const partners = [
-  { icon: Globe, name: "Global Fund" },
-  { icon: Shield, name: "Sovereign Trust" },
-  { icon: BarChart3, name: "Alpha Partners" },
-  { icon: Landmark, name: "Institutional Capital" },
-  { icon: Briefcase, name: "Strategic Holdings" },
-  { icon: Scale, name: "Meridian Group" },
-  { icon: CircleDollarSign, name: "Capital Reserve" },
-  { icon: Building, name: "Pinnacle Equity" },
-];
-
-const PartnerCarousel = () => {
-  return (
-    <div className="relative">
-      {/* Fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-surface to-transparent z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-surface to-transparent z-10" />
-
-      <div className="overflow-hidden">
-        <motion.div
-          className="flex gap-8"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 25, ease: "linear", repeat: Infinity }}
-        >
-          {[...partners, ...partners].map((p, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 flex flex-col items-center gap-3 py-8 px-10 border border-border rounded-sm bg-card/50 hover:border-primary/30 transition-colors min-w-[180px]"
-            >
-              <p.icon className="w-8 h-8 text-muted-foreground" />
-              <span className="text-xs text-muted-foreground tracking-wider uppercase whitespace-nowrap">{p.name}</span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-};
 const heroSlides = [
   {
     image: hero1,
-    headline: "Building the",
-    highlight: "Future of Capital",
-    subtitle: "Ward Capital Group is a global investment firm deploying strategic capital across venture technology, real estate, and energy.",
+    headline: content.homepage.hero.headline,
+    highlight: content.homepage.hero.highlight,
+    subtitle: content.homepage.hero.subtitle,
   },
   {
     image: hero2,
     headline: "Powering the",
     highlight: "Energy Transition",
-    subtitle: "Investing in traditional and renewable energy infrastructure to fuel the next generation of sustainable growth.",
+    subtitle: content.homepage.hero.description,
   },
   {
     image: hero3,
     headline: "Scaling",
     highlight: "Transformative Technology",
-    subtitle: "Identifying and accelerating breakthrough companies in AI, quantum computing, and deep tech from seed to scale.",
+    subtitle: "Identifying and accelerating breakthrough companies from seed to scale.",
   },
 ];
 
@@ -131,7 +94,7 @@ const Index = () => {
               className="max-w-3xl"
             >
               <div className="line-accent mb-8" />
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground leading-[1.05] mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground leading-[1.05] mb-6 whitespace-pre-line">
                 {heroSlides[currentSlide].headline}
                 <br />
                 <span className="gold-text">{heroSlides[currentSlide].highlight}</span>
@@ -141,16 +104,16 @@ const Index = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  to="/contact"
+                  to={content.homepage.hero.cta.primary.link}
                   className="px-8 py-3.5 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-sm hover:bg-gold-light transition-all duration-300"
                 >
-                  Engage With Us
+                  {content.homepage.hero.cta.primary.label}
                 </Link>
                 <Link
-                  to="/platforms"
+                  to={content.homepage.hero.cta.secondary.link}
                   className="px-8 py-3.5 border border-border text-foreground font-medium text-sm tracking-wide rounded-sm hover:border-primary hover:text-primary transition-all duration-300"
                 >
-                  Explore Platforms
+                  {content.homepage.hero.cta.secondary.label}
                 </Link>
               </div>
             </motion.div>
@@ -188,31 +151,41 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[1]" />
       </section>
 
-      {/* OVERVIEW - 3 COLUMNS */}
+      {/* OVERVIEW - FEATURED VERTICALS */}
       <section className="py-24 lg:py-32">
         <div className="container mx-auto px-6 lg:px-12">
           <AnimatedSection>
             <div className="text-center mb-16">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">Investment Verticals</p>
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground">Strategic Capital Deployment</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">{content.homepage.overview.title}</p>
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground">{content.homepage.overview.subtitle}</h2>
             </div>
           </AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { icon: TrendingUp, title: "Venture Capital", desc: "Investing in transformative technology companies from seed to growth stage, with a focus on AI, fintech, and deep tech." },
-              { icon: Building2, title: "Cities & Real Estate", desc: "Developing and investing in premium real estate assets across major global markets and emerging urban centers." },
-              { icon: Zap, title: "Energy", desc: "Deploying capital in traditional and renewable energy infrastructure to power the next generation of growth." },
-            ].map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.15}>
-                <div className="group p-8 lg:p-10 border border-border rounded-sm bg-card card-hover">
-                  <div className="w-12 h-12 rounded-sm bg-secondary flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors duration-500">
-                    <item.icon className="w-5 h-5 text-primary" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+            {content.homepage.overview.items.map((item, i) => {
+              const icons = [TrendingUp, Building2, Zap];
+              const Icon = icons[i % icons.length];
+              const isPriority = i < 2;
+              
+              return (
+                <AnimatedSection 
+                  key={item.title} 
+                  delay={i * 0.15}
+                  className={isPriority ? "md:col-span-3" : "md:col-span-2 md:col-start-3"}
+                >
+                  <div className={`group p-8 lg:p-12 border border-border rounded-sm bg-card card-hover h-full relative overflow-hidden ${isPriority ? "border-primary/20" : ""}`}>
+                    {isPriority && (
+                      <div className="absolute -right-16 -top-16 w-32 h-32 bg-primary/5 blur-3xl rounded-full group-hover:bg-primary/10 transition-colors" />
+                    )}
+                    <div className={`${isPriority ? "w-16 h-16" : "w-12 h-12"} rounded-sm bg-secondary flex items-center justify-center mb-8 group-hover:bg-primary/10 transition-colors duration-500`}>
+                      <Icon className={`${isPriority ? "w-7 h-7" : "w-5 h-5"} text-primary`} />
+                    </div>
+                    <h3 className={`${isPriority ? "text-2xl" : "text-xl"} font-bold text-foreground mb-4`}>{item.title}</h3>
+                    <p className={`text-muted-foreground leading-relaxed ${isPriority ? "text-base" : "text-sm"}`}>{item.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              </AnimatedSection>
-            ))}
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -222,25 +195,25 @@ const Index = () => {
         <div className="container mx-auto px-6 lg:px-12">
           <AnimatedSection>
             <div className="max-w-3xl mx-auto text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">Our Mandate</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">{content.homepage.mandate.title}</p>
               <h2 className="text-3xl lg:text-5xl font-bold text-foreground leading-tight mb-8">
-                We invest with conviction in industries that shape the future of civilization.
+                {content.homepage.mandate.headline}
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Ward Capital Group operates at the intersection of innovation and permanence. Our investment philosophy is grounded in long-term value creation, disciplined capital allocation, and a deep commitment to building enduring enterprises across borders and industries.
+                {content.homepage.mandate.description}
               </p>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* SIGNATURE PLATFORMS */}
+      {/* SIGNATURE PLATFORMS - PRIORITIZED */}
       <section className="py-24 lg:py-32">
         <div className="container mx-auto px-6 lg:px-12">
           <AnimatedSection>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">Signature Platforms</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">{content.homepage.platforms.title}</p>
                 <h2 className="text-3xl lg:text-4xl font-bold text-foreground">Our Operating Companies</h2>
               </div>
               <Link to="/platforms" className="text-sm text-primary flex items-center gap-2 hover:gap-3 transition-all">
@@ -248,62 +221,53 @@ const Index = () => {
               </Link>
             </div>
           </AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "FutureTech", desc: "A venture platform identifying and scaling the next generation of transformative technology companies across AI, quantum, and biotech.", tag: "Venture" },
-              { title: "NellyCrest", desc: "A premium real estate development and investment platform focused on urban luxury, mixed-use, and sustainable city infrastructure.", tag: "Real Estate" },
-              { title: "Ward Petro", desc: "An energy investment platform spanning upstream exploration, midstream logistics, and renewable energy transition strategies.", tag: "Energy" },
-            ].map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.15}>
-                <div className="group p-8 lg:p-10 border border-border rounded-sm bg-card card-hover h-full flex flex-col">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary mb-6">{item.tag}</span>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed flex-1">{item.desc}</p>
-                  <div className="mt-8 pt-6 border-t border-border">
-                    <Link to="/platforms" className="text-sm text-muted-foreground group-hover:text-primary flex items-center gap-2 transition-colors">
-                      Learn More <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+          
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+            {content.homepage.platforms.items.map((item, i) => {
+              const isPriority = i < 2;
+              return (
+                <AnimatedSection 
+                  key={item.title} 
+                  delay={i * 0.15}
+                  className={isPriority ? "md:col-span-3" : "md:col-span-2 md:col-start-3"}
+                >
+                  <div className={`group p-8 lg:p-12 border border-border rounded-sm bg-card card-hover h-full flex flex-col relative ${isPriority ? "border-primary/30 ring-1 ring-primary/5" : ""}`}>
+                    {isPriority && (
+                      <span className="absolute top-8 right-8 text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">Featured Platform</span>
+                    )}
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary mb-6">{item.tag}</span>
+                    <h3 className={`${isPriority ? "text-3xl" : "text-2xl"} font-bold text-foreground mb-6`}>{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed flex-1">{item.description}</p>
+                    <div className="mt-10 pt-6 border-t border-border">
+                      <Link to="/platforms" className="text-sm text-muted-foreground group-hover:text-primary flex items-center gap-2 transition-colors font-medium">
+                        Explore Platform <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </AnimatedSection>
-            ))}
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* PARTNERSHIPS — Infinite Carousel */}
+      {/* PARTNERSHIPS */}
       <section className="py-24 lg:py-32 bg-surface border-y border-border overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12">
           <AnimatedSection>
             <div className="text-center mb-16">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">Partnerships & Trust</p>
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Global Institutional Partnerships</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">{content.homepage.partnerships.title}</p>
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{content.homepage.partnerships.description}</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
-                We work alongside leading institutions, sovereign entities, and family offices to deploy capital at scale.
+                {content.homepage.partnerships.approach}
               </p>
             </div>
-          </AnimatedSection>
-          <AnimatedSection delay={0.2}>
-            <PartnerCarousel />
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 lg:py-32">
-        <div className="container mx-auto px-6 lg:px-12">
-          <AnimatedSection>
-            <div className="text-center max-w-2xl mx-auto">
-              <div className="line-accent mx-auto mb-8" />
-              <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-6">Engage With Us</h2>
-              <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-                Whether you are an institutional investor, a strategic partner, or a visionary founder — we'd like to hear from you.
-              </p>
+            <div className="text-center">
               <Link
-                to="/contact"
+                to={content.homepage.partnerships.cta.link}
                 className="inline-block px-10 py-4 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-sm hover:bg-gold-light transition-all duration-300"
               >
-                Contact Us
+                {content.homepage.partnerships.cta.label}
               </Link>
             </div>
           </AnimatedSection>

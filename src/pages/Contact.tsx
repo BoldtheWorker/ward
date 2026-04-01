@@ -4,6 +4,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { content } from "@/data/content";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -49,8 +50,17 @@ const Contact = () => {
                       <Mail className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-foreground">Email</p>
-                      <p className="text-sm text-muted-foreground">info@wardcapital.org</p>
+                      <p className="text-sm font-medium text-foreground">General Inquiries</p>
+                      <p className="text-sm text-muted-foreground">{content.contact.emails.general}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-sm bg-secondary flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Partnerships & Capital</p>
+                      <p className="text-sm text-muted-foreground">{content.contact.emails.partnerships}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -58,8 +68,8 @@ const Contact = () => {
                       <MapPin className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-foreground">Location</p>
-                      <p className="text-sm text-muted-foreground">Ghana</p>
+                      <p className="text-sm font-medium text-foreground">Global Presence</p>
+                      <p className="text-sm text-muted-foreground">{content.contact.locations.join(" | ")}</p>
                     </div>
                   </div>
                 </div>

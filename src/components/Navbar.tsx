@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { content } from "@/data/content";
 import wardLogo from "@/assets/ward-logo.jpg";
 
 const navLinks = [
@@ -35,7 +36,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-3">
-            <img src={wardLogo} alt="Ward Capital Group" className="h-10 w-10 rounded-sm object-cover" />
+            <img src={wardLogo} alt={content.footer.branding} className="h-10 w-10 rounded-sm object-cover" />
             <span className="text-foreground font-bold text-lg tracking-tight">
               Ward <span className="font-light text-muted-foreground">Capital Group</span>
             </span>
