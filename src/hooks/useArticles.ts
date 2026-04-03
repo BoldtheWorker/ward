@@ -26,6 +26,7 @@ export const useArticles = () => {
         const { data, error } = await supabase
           .from('articles')
           .select('*')
+          .neq('id', 'e809311b-cc89-49ed-9686-21820db07671') // Filter out problematic ghost record
           .order('created_at', { ascending: false });
 
         if (error) throw error;
