@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { staticInsights } from '../data/static-insights';
 
 export interface Article {
   id: string;
@@ -28,9 +29,18 @@ export const useArticles = () => {
           .order('created_at', { ascending: false });
 
         if (error) throw error;
-        setArticles(data || []);
+
+        // Merge local static insights with dynamic database results
+        const dynamicArticles = data || [];
+        const merged = [...staticInsights, ...dynamicArticles].sort(
+          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+
+        setArticles(merged);
       } catch (err: any) {
         setError(err.message);
+        // Fallback to static insights on error
+        setArticles(staticInsights);
       } finally {
         setLoading(false);
       }
@@ -51,6 +61,16 @@ export const useArticle = (slug: string) => {
     const fetchArticle = async () => {
       try {
         setLoading(true);
+
+        // First check static insights
+        const staticMatch = staticInsights.find(a => a.slug === slug);
+        if (staticMatch) {
+          setArticle(staticMatch);
+          setLoading(false);
+          return;
+        }
+
+        // Otherwise check Supabase
         const { data, error } = await supabase
           .from('articles')
           .select('*')
