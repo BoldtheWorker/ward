@@ -8,7 +8,7 @@ import { content } from "@/data/content";
 
 const Contact = () => {
   const { toast } = useToast();
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "", "bot-field": "" });
 
     const encode = (data: Record<string, string>) => {
       return Object.keys(data)
@@ -26,7 +26,7 @@ const Contact = () => {
       })
         .then(() => {
           toast({ title: "Message sent", description: "Thank you for reaching out. We'll be in touch shortly." });
-          setForm({ name: "", email: "", subject: "", message: "" });
+          setForm({ name: "", email: "", subject: "", message: "", "bot-field": "" });
         })
         .catch((error) => {
           toast({ variant: "destructive", title: "Error", description: "Sorry, there was a problem sending your message." });
@@ -105,8 +105,8 @@ const Contact = () => {
                   className="space-y-6"
                 >
                   <input type="hidden" name="form-name" value="contact-form" />
-                  <p className="hidden">
-                    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                   <p className="hidden">
+                    <label>Don’t fill this out if you’re human: <input name="bot-field" value={form["bot-field"]} onChange={(e) => setForm({ ...form, "bot-field": e.target.value })} /></label>
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
