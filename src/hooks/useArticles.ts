@@ -23,25 +23,26 @@ export const useArticles = () => {
     const fetchArticles = async () => {
       try {
         setLoading(true);
-        const { data, error } = await supabase
+        const { data, error: supabaseError } = await supabase
           .from('articles')
           .select('*')
-          .neq('id', 'e809311b-cc89-49ed-9686-21820db07671') // Filter out problematic ghost record
+          .neq('id', 'e809311b-cc89-49ed-9686-21820db07671')
           .order('created_at', { ascending: false });
 
-        if (error) throw error;
+        if (supabaseError) throw supabaseError;
 
-        // Merge local static insights with dynamic database results
         const dynamicArticles = data || [];
         const merged = [...staticInsights, ...dynamicArticles].sort(
           (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
 
         setArticles(merged);
+        setError(null);
       } catch (err: any) {
-        setError(err.message);
-        // Fallback to static insights on error
+        console.error('Supabase fetch failed:', err.message);
+        // On error, we still show static insights but record the error for the UI
         setArticles(staticInsights);
+        setError(err.message);
       } finally {
         setLoading(false);
       }

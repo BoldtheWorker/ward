@@ -30,15 +30,22 @@ const Insights = () => {
 
       <section className="py-24 lg:py-32">
         <div className="container mx-auto px-6 lg:px-12">
+          {error && (
+            <div className="mb-8 p-4 border border-primary/20 bg-primary/5 rounded-sm flex items-center justify-between">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                Live Sync Unavailable - Showing Historical Insights
+              </p>
+              <span className="text-[10px] text-muted-foreground opacity-50 font-mono">
+                {error.includes('fetch') ? 'Database is currently re-authorizing' : error}
+              </span>
+            </div>
+          )}
+
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 space-y-4">
               <Loader2 className="w-10 h-10 text-primary animate-spin" />
               <p className="text-muted-foreground animate-pulse">Loading perspective...</p>
-            </div>
-          ) : error ? (
-            <div className="p-8 border border-destructive/20 bg-destructive/5 rounded-sm text-center">
-              <p className="text-destructive font-medium mb-2">Unavailable to load articles</p>
-              <p className="text-muted-foreground text-sm">{error}</p>
             </div>
           ) : articles.length === 0 ? (
             <div className="text-center py-20 border border-dashed border-border rounded-lg">
